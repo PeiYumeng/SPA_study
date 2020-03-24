@@ -1,0 +1,21 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 90%;
+  height: 80%;
+}
+  h3{
+    text-align: center;
+  }
+tr{
+    text-align: center;
+  }
+  .b1{
+    margin-left:300px
+  }
+  .b2{
+    width: 700px;
+    height: 350px;
+    margin:0 auto;
+    margin-top:20px;
+  }
