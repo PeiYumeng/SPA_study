@@ -1,45 +1,48 @@
 var $timerButton = (function(){
-        var $btn = $('<input class="timer-button" type="button" disabled>'),
-                cfg = {
+        var  cfg = {
                     container:'body',
                     num:6,
                     title:'同意',
                     enable:false,
                     event:'lalala',
-                },
-                num = cfg.num,
-                timer;
-
+                };
     function show(config){
         //步骤1.DOM draw 2.event bind
+        var num = cfg.num,timer;
+        var $btn = $('<input class="timer-button" type="button" disabled>');
         $.extend(cfg,config);//用现在的config扩展原来的cfg
        $(cfg.container).append($btn);
         $btn.val(cfg.title+'('+num+'s)');
         if(cfg.enabled==='false'){
-            t(num);
+            timer = setInterval(function(){
+                num--;
+                if(num ===0){
+                    clearInterval(timer);
+                    $btn.val(cfg.title);
+                    $btn.removeAttr('disabled');
+                }else{
+                    $btn.val(cfg.title+'('+num+'s)');
+                }
+            },1000);
             $btn.click(function(){
                 alert(cfg.event)
             });
         }else{
             $btn.removeAttr('disabled');
             $btn.click(function(){
-                t(num);
+                timer = setInterval(function(){
+                    num--;
+                    if(num ===0){
+                        clearInterval(timer);
+                        $btn.val(cfg.title);
+                        $btn.removeAttr('disabled');
+                    }else{
+                        $btn.val(cfg.title+'('+num+'s)');
+                    }
+                },1000);
             });
             num=cfg.num;
         }
-    }
-    //倒计时
-    function t(num){
-        timer = setInterval(function(){
-            num--;
-            if(num ===0){
-                clearInterval(timer);
-                $btn.val(cfg.title);
-                $btn.removeAttr('disabled');
-            }else{
-                $btn.val(cfg.title+'('+num+'s)');
-            }
-        },1000);
     }
     return {
         show:show
